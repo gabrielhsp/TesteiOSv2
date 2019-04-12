@@ -18,14 +18,6 @@ protocol LoginDisplayLogic: class {
 }
 
 class LoginViewController: UIViewController, LoginDisplayLogic {
-    func success() {
-        
-    }
-    
-    func failure(alertController: UIAlertController) {
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
     @IBOutlet weak var textFieldUser: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
     @IBOutlet weak var buttonLogin: UIButton!
@@ -82,6 +74,14 @@ class LoginViewController: UIViewController, LoginDisplayLogic {
         guard let userPassword = textFieldPassword.text else { return }
         
         interactor?.validateLoginFields(user: userValue, password: userPassword)
+    }
+    
+    func success() {
+        
+    }
+    
+    func failure(alertController: UIAlertController) {
+        self.present(alertController, animated: true, completion: nil)
     }
     
     // MARK: Setup Layout

@@ -19,7 +19,6 @@ protocol LoginPresentationLogic {
 class LoginPresenter: LoginPresentationLogic {
     
     weak var viewController: LoginDisplayLogic?
-    var interactor = LoginInteractor()
     
     // Method to create a custom alert message inside ViewController
     func showCustomAlert(title: String, message: String) {
