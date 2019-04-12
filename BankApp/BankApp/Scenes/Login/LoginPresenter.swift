@@ -12,20 +12,20 @@
 
 import UIKit
 
-protocol LoginPresentationLogic
-{
-    func presentSomething(response: Login.Something.Response)
+protocol LoginPresentationLogic {
+    func showCustomAlert(title: String, message: String) -> Void
 }
 
-class LoginPresenter: LoginPresentationLogic
-{
+class LoginPresenter: LoginPresentationLogic {
+    
     weak var viewController: LoginDisplayLogic?
+    var interactor = LoginInteractor()
     
-    // MARK: Do something
-    
-    func presentSomething(response: Login.Something.Response)
-    {
-        let viewModel = Login.Something.ViewModel()
-        viewController?.displaySomething(viewModel: viewModel)
+    // Method to create a custom alert message inside ViewController
+    func showCustomAlert(title: String, message: String) {
+        let customAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            customAlert.addAction(UIAlertAction(title: "Entendi", style: .cancel, handler: nil))
+        
+        viewController?.failure(alertController: customAlert)
     }
 }

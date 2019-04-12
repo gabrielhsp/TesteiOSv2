@@ -13,26 +13,57 @@
 import UIKit
 
 protocol LoginBusinessLogic {
-    func doSomething(request: Login.Something.Request)
+    func validateLoginFields(user: String, password: String) -> Bool
 }
 
-protocol LoginDataStore {
-    //var name: String { get set }
-}
-
-class LoginInteractor: LoginBusinessLogic, LoginDataStore {
+class LoginInteractor: LoginBusinessLogic {
     var presenter: LoginPresentationLogic?
     var worker: LoginWorker?
-    //var name: String = ""
     
-    // MARK: Do something
+    // MARK: Business Rules Methods
     
-    func doSomething(request: Login.Something.Request) {
-        worker = LoginWorker()
-        worker?.doSomeWork()
+    // This method validates if the values of user and password are not empty
+    // He also validates if the user fill a cpf or a email and if the passwords match with the required pattern
+    func validateLoginFields(user: String, password: String) -> Bool {
+        if valuesAreEmpty(user: user, password: password) && userLoginIsValid(user: user) && passwordIsValid(password: password) {
+            return true
+        }
         
-        let response = Login.Something.Response()
+        presenter?.showCustomAlert(title: "Usuário não encontrado", message: "Não conseguimos encontrar seu usuário.")
         
-        presenter?.presentSomething(response: response)
+        return false
+    }
+    
+    // This method validates if the user value and password value are empty
+    func valuesAreEmpty(user: String, password: String) -> Bool {
+        if user.isEmpty && password.isEmpty {
+            presenter?.showCustomAlert(title: "Dados inválidos", message: "Os campos não podem estar em branco.")
+            return false
+        }
+        
+        return true
+    }
+    
+    // This method validates if the user value is a valid email or a valid cpf
+    func userLoginIsValid(user: String) -> Bool {
+        if user.isValidCPF() || user.isValidEmail() {
+            return true
+        }
+        
+        presenter?.showCustomAlert(title: "CPF ou e-mail inválidos", message: "Os dados do seu CPF ou do seu e-mail estão incorretos.")
+        
+        return false
+    }
+    
+    // This method validates if the password is valid and contains a uppercase character, a number and a special character
+    // He also checks if the value is bigger then three characters
+    func passwordIsValid(password: String) -> Bool {
+        if password.isValidPassword() {
+            return true
+        }
+        
+        presenter?.showCustomAlert(title: "Senha inválida", message: "A senha deve conter um caracter maiúsculo, um especial e um número.")
+        
+        return false
     }
 }

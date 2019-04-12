@@ -13,10 +13,19 @@
 import UIKit
 
 protocol LoginDisplayLogic: class {
-    func displaySomething(viewModel: Login.Something.ViewModel)
+    func success()
+    func failure (alertController: UIAlertController) -> Void
 }
 
 class LoginViewController: UIViewController, LoginDisplayLogic {
+    func success() {
+        
+    }
+    
+    func failure(alertController: UIAlertController) {
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     @IBOutlet weak var textFieldUser: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
     @IBOutlet weak var buttonLogin: UIButton!
@@ -36,8 +45,7 @@ class LoginViewController: UIViewController, LoginDisplayLogic {
     }
     
     // MARK: Setup
-    
-    private func setup() {
+    func setup() {
         let viewController = self
         let interactor = LoginInteractor()
         let presenter = LoginPresenter()
@@ -48,13 +56,14 @@ class LoginViewController: UIViewController, LoginDisplayLogic {
         interactor.presenter = presenter
         presenter.viewController = viewController
         router.viewController = viewController
-        router.dataStore = interactor
+        // router.dataStore = interactor
     }
     
     // MARK: Routing
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let scene = segue.identifier {
             let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
+            
             if let router = router, router.responds(to: selector) {
                 router.perform(selector, with: segue)
             }
@@ -64,19 +73,23 @@ class LoginViewController: UIViewController, LoginDisplayLogic {
     // MARK: View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        doSomething()
+        setup()
+        setupLayout()
     }
     
-    // MARK: Do something
-    
-    //@IBOutlet weak var nameTextField: UITextField!
-    
-    func doSomething() {
-        let request = Login.Something.Request()
-        interactor?.doSomething(request: request)
+    @IBAction func actionLoginUser(_ sender: Any) {
+        guard let userValue = textFieldUser.text else { return }
+        guard let userPassword = textFieldPassword.text else { return }
+        
+        interactor?.validateLoginFields(user: userValue, password: userPassword)
     }
     
-    func displaySomething(viewModel: Login.Something.ViewModel) {
-        //nameTextField.text = viewModel.name
+    // MARK: Setup Layout
+    func setupLayout() {
+        buttonLogin.layer.cornerRadius = 4
+        buttonLogin.layer.shadowColor = #colorLiteral(red: 0.231372549, green: 0.2823529412, blue: 0.9333333333, alpha: 1)
+        buttonLogin.layer.shadowOffset = CGSize(width: 0, height: 3)
+        buttonLogin.layer.shadowRadius = 4
+        buttonLogin.layer.shadowOpacity = 0.3
     }
 }
