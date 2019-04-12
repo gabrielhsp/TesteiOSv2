@@ -11,7 +11,27 @@
 //
 
 import UIKit
+import Alamofire
+
+typealias responseHandler = (_ response: LoginResponse) -> ()
 
 class LoginWorker {
-    
+    func getUserData(parameters: [String: String], responseRequest: @escaping(responseHandler)) {
+        Alamofire.request("https://bank-app-test.herokuapp.com/api/login", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON(completionHandler: { response in
+                switch response.result {
+                    case .success(_):
+                        do {
+                            let loginResponse = try JSONDecoder().decode(LoginResponse.self, from: response.data!)
+                            
+                            responseRequest(loginResponse)
+                            
+                            print(loginResponse)
+                        } catch (let error) {
+                            print(error)
+                        }
+                    case .failure(let error):
+                        print(error)
+                }
+        })
+    }
 }

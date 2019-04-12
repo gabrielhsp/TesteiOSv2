@@ -13,7 +13,7 @@
 import UIKit
 
 protocol LoginDisplayLogic: class {
-    func success()
+    func success(userData: LoginResponse) -> Void
     func failure (alertController: UIAlertController) -> Void
 }
 
@@ -73,11 +73,19 @@ class LoginViewController: UIViewController, LoginDisplayLogic {
         guard let userValue = textFieldUser.text else { return }
         guard let userPassword = textFieldPassword.text else { return }
         
-        interactor?.validateLoginFields(user: userValue, password: userPassword)
+        guard let interceptRequest = interactor?.validateLoginFields(user: userValue, password: userPassword) else {
+            return
+        }
+        
+        print(interceptRequest)
+        
+        interactor?.loginUser(user: userValue, password: userPassword)
     }
     
-    func success() {
+    func success(userData: LoginResponse) {
+        // Call router
         
+        print(userData.userAccount)
     }
     
     func failure(alertController: UIAlertController) {

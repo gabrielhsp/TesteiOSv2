@@ -14,11 +14,12 @@ import UIKit
 
 protocol LoginBusinessLogic {
     func validateLoginFields(user: String, password: String) -> Bool
+    func loginUser(user: String, password: String) -> Void
 }
 
 class LoginInteractor: LoginBusinessLogic {
     var presenter: LoginPresentationLogic?
-    var worker: LoginWorker?
+    var worker = LoginWorker()
     
     // MARK: Business Rules Methods
     
@@ -26,6 +27,8 @@ class LoginInteractor: LoginBusinessLogic {
     // He also validates if the user fill a cpf or a email and if the passwords match with the required pattern
     func validateLoginFields(user: String, password: String) -> Bool {
         if valuesAreEmpty(user: user, password: password) && userLoginIsValid(user: user) && passwordIsValid(password: password) {
+            loginUser(user: user, password: password)
+            
             return true
         }
         
@@ -65,5 +68,15 @@ class LoginInteractor: LoginBusinessLogic {
         presenter?.showCustomAlert(title: "Senha inválida", message: "A senha deve conter um caracter maiúsculo, um especial e um número.")
         
         return false
+    }
+    
+    func loginUser(user: String, password: String) {
+       let parameters = ["user": user, "password": password]
+        
+        worker.getUserData(parameters: parameters, responseRequest: { response in
+            self.presenter?.login(loginResponse: response)
+            
+            print(response)
+        })
     }
 }

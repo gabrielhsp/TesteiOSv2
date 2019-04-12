@@ -12,17 +12,27 @@
 
 import UIKit
 
-enum Login {
-    // MARK: Use cases
+struct LoginResponse: Codable {
+    var userAccount: UserAccount?
+    var error: Error?
     
-    enum Something {
-        struct Request {
-        }
+    struct UserAccount: Codable {
+        var id: Int = 0
+        var name: String?
+        var agency: String?
+        var account: String?
+        var balance: Double?
         
-        struct Response {
+        private enum CodingKeys: String, CodingKey {
+            case id = "userId"
+            case name
+            case agency
+            case account = "bankAccount"
+            case balance
         }
-        
-        struct ViewModel {
-        }
+    }
+    
+    struct Error: Codable {
+        var message: String?
     }
 }

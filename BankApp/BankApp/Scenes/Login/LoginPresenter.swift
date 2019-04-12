@@ -14,6 +14,7 @@ import UIKit
 
 protocol LoginPresentationLogic {
     func showCustomAlert(title: String, message: String) -> Void
+    func login(loginResponse: LoginResponse) -> Void
 }
 
 class LoginPresenter: LoginPresentationLogic {
@@ -26,5 +27,9 @@ class LoginPresenter: LoginPresentationLogic {
             customAlert.addAction(UIAlertAction(title: "Entendi", style: .cancel, handler: nil))
         
         viewController?.failure(alertController: customAlert)
+    }
+    
+    func login(loginResponse: LoginResponse) {
+        viewController?.success(userData: loginResponse)
     }
 }
