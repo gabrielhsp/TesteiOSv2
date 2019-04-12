@@ -27,7 +27,7 @@ class LoginInteractor: LoginBusinessLogic {
     // He also validates if the user fill a cpf or a email and if the passwords match with the required pattern
     func validateLoginFields(user: String, password: String) -> Bool {
         if valuesAreEmpty(user: user, password: password) && userLoginIsValid(user: user) && passwordIsValid(password: password) {
-            loginUser(user: user, password: password)
+            self.loginUser(user: user, password: password)
             
             return true
         }

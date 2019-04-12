@@ -29,6 +29,7 @@ class LoginPresenter: LoginPresentationLogic {
         viewController?.failure(alertController: customAlert)
     }
     
+    // Method to intercept and pass to the success method of viewController the data
     func login(loginResponse: LoginResponse) {
         viewController?.success(userData: loginResponse)
     }

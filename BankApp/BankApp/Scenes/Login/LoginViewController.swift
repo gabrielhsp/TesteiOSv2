@@ -73,13 +73,7 @@ class LoginViewController: UIViewController, LoginDisplayLogic {
         guard let userValue = textFieldUser.text else { return }
         guard let userPassword = textFieldPassword.text else { return }
         
-        guard let interceptRequest = interactor?.validateLoginFields(user: userValue, password: userPassword) else {
-            return
-        }
-        
-        print(interceptRequest)
-        
-        interactor?.loginUser(user: userValue, password: userPassword)
+        interactor?.validateLoginFields(user: userValue, password: userPassword)
     }
     
     func success(userData: LoginResponse) {
