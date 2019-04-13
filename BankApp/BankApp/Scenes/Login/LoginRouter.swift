@@ -14,6 +14,7 @@ import UIKit
 
 @objc protocol LoginRoutingLogic {
 //    func routToExtract(segue: UIStoryboardSegue?)
+    func segueToViewController(segue: UIStoryboardSegue?)
 }
 
 protocol LoginDataPassing {
@@ -22,6 +23,13 @@ protocol LoginDataPassing {
 
 class LoginRouter: NSObject, LoginRoutingLogic, LoginDataPassing {
     weak var viewController: LoginViewController?
+    
+    func segueToViewController(segue: UIStoryboardSegue?) {
+        if let segue = segue {
+            let destinationViewController = segue.destination as! ExtractViewController
+            let destinationDataStore = destinationViewController.router!.dataStore!
+        }
+    }
     
 //    var dataStore: LocationDataStore?
 //

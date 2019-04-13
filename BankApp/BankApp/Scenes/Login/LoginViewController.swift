@@ -22,6 +22,8 @@ class LoginViewController: UIViewController, LoginDisplayLogic {
     @IBOutlet weak var textFieldPassword: UITextField!
     @IBOutlet weak var buttonLogin: UIButton!
     
+    var userAccount: LoginResponse.UserAccount?
+    
     var interactor: LoginBusinessLogic?
     var router: (NSObjectProtocol & LoginRoutingLogic & LoginDataPassing)?
     
