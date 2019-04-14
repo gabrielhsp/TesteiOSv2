@@ -16,8 +16,10 @@ import Alamofire
 typealias responseHandler = (_ response: LoginResponse) -> ()
 
 class LoginWorker {
+    let url: String = "https://bank-app-test.herokuapp.com/api/login"
+    
     func getUserData(parameters: [String: String], responseRequest: @escaping(responseHandler)) {
-        Alamofire.request("https://bank-app-test.herokuapp.com/api/login", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON(completionHandler: {
+        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON(completionHandler: {
             response in
                 switch response.result {
                     case .success(_):

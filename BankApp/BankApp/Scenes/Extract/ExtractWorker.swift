@@ -11,10 +11,27 @@
 //
 
 import UIKit
+import Alamofire
 
-class ExtractWorker
-{
-    func doSomeWork()
-    {
+typealias extractHandler = (_ response: ExtractResponse) -> ()
+
+class ExtractWorker {
+    let url: String = "https://bank-app-test.herokuapp.com/api/statements/"
+    
+    func getExtractList(extractId: Int, responseRequest: @escaping(extractHandler)) {
+        Alamofire.request("\(self.url)\(extractId)").responseJSON(completionHandler: { response in
+            switch response.result {
+                case .success(_):
+                    do {
+                        let extractResponse = try JSONDecoder().decode(ExtractResponse.self, from: response.data!)
+                        responseRequest(extractResponse)
+                    } catch (let error) {
+                        print(error)
+                    }
+                
+                case .failure(let error):
+                    print(error)
+            }
+        })
     }
 }

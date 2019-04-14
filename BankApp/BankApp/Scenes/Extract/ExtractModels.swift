@@ -12,20 +12,25 @@
 
 import UIKit
 
-enum Extract
-{
-    // MARK: Use cases
+struct ExtractResponse: Codable {
+    var extractData: ExtractData?
+    var error: Error?
     
-    enum Something
-    {
-        struct Request
-        {
+    struct ExtractData: Codable {
+        var title: String?
+        var description: String?
+        var date: String?
+        var value: Double?
+        
+        private enum CodingKeys: String, CodingKey {
+            case title
+            case description = "desc"
+            case date
+            case value
         }
-        struct Response
-        {
-        }
-        struct ViewModel
-        {
-        }
+    }
+    
+    struct Error: Codable {
+        var message: String?
     }
 }
