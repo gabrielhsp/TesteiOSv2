@@ -13,6 +13,7 @@
 import UIKit
 
 protocol ExtractDisplayLogic: class {
+    func success(extract: ExtractResponse.ExtractData) -> Void
     func renderUserAccountData(userData: LoginResponse.UserAccount) -> Void
 }
 
@@ -20,7 +21,10 @@ class ExtractViewController: UIViewController, ExtractDisplayLogic {
     @IBOutlet weak var labelUserName: UILabel!
     @IBOutlet weak var labelUserAccountAgency: UILabel!
     @IBOutlet weak var labelUserBalance: UILabel!
+    @IBOutlet weak var tableViewExtract: UITableView!
     
+    var userId: String?
+    var extractItems: [ExtractResponse.ExtractData] = []
     var interactor: ExtractBusinessLogic?
     var router: (NSObjectProtocol & ExtractRoutingLogic & ExtractDataPassing)?
     
@@ -64,12 +68,17 @@ class ExtractViewController: UIViewController, ExtractDisplayLogic {
     // MARK: View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         interactor?.getUserAccountData()
+        
+        registerTableViewCell()
+        setupTableViewCell()
+        renderExtractItemsList()
     }
     
     // MARK: Render user account data inside ExtractViewController
     func renderUserAccountData(userData: LoginResponse.UserAccount) {
-        print("ExtractViewController", userData)
+        self.userId = String(userData.id)
         
         if let userName = userData.name {
             self.labelUserName.text = userName
@@ -87,9 +96,50 @@ class ExtractViewController: UIViewController, ExtractDisplayLogic {
     @IBAction func actionLogoutUser(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    func success(extract: ExtractResponse.ExtractData) {
+        showExtractList(extract: extract)
+    }
+    
+    func showExtractList(extract: ExtractResponse.ExtractData) {
+        self.extractItems = [extract]
+        self.tableViewExtract.reloadData()
+    }
+    
+    func renderExtractItemsList() {
+        interactor?.getExtractListByUser(userId: self.userId!)
+    }
 }
 
-extension ExtractViewController {
+extension ExtractViewController: UITableViewDelegate, UITableViewDataSource {
+    private func setupTableViewCell() {
+        self.tableViewExtract.delegate = self
+        self.tableViewExtract.dataSource = self
+    }
+    
+    private func registerTableViewCell() {
+        let nib = UINib(nibName: "ExtractTableViewCell", bundle: Bundle.main)
+        
+        self.tableViewExtract.register(nib, forCellReuseIdentifier: "extractTableViewCell")
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+         return self.extractItems.count
+//        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableViewExtract.dequeueReusableCell(withIdentifier: "extractTableViewCell") as! ExtractTableViewCell
+        
+        cell.renderExtractData(extract: self.extractItems[indexPath.row])
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }

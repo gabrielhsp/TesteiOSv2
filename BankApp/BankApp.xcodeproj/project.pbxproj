@@ -26,6 +26,8 @@
 		B827AFE82260DC31003514B6 /* ExtractViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B827AFE22260DC31003514B6 /* ExtractViewController.swift */; };
 		B827AFE92260DC31003514B6 /* ExtractInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B827AFE32260DC31003514B6 /* ExtractInteractor.swift */; };
 		B8DEE87C2262C3A400D72EBC /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DEE87B2262C3A400D72EBC /* Double+Extensions.swift */; };
+		B8E42A662263AFEA008B9A74 /* ExtractTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E42A652263AFEA008B9A74 /* ExtractTableViewCell.swift */; };
+		B8E42A692263B9B1008B9A74 /* ExtractTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8E42A682263B9B1008B9A74 /* ExtractTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +51,8 @@
 		B827AFE22260DC31003514B6 /* ExtractViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtractViewController.swift; sourceTree = "<group>"; };
 		B827AFE32260DC31003514B6 /* ExtractInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtractInteractor.swift; sourceTree = "<group>"; };
 		B8DEE87B2262C3A400D72EBC /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
+		B8E42A652263AFEA008B9A74 /* ExtractTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtractTableViewCell.swift; sourceTree = "<group>"; };
+		B8E42A682263B9B1008B9A74 /* ExtractTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExtractTableViewCell.xib; sourceTree = "<group>"; };
 		CA1F435A385BF25EE336BFD5 /* Pods_BankApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7423A65FCF806E614F6BC4A /* Pods-BankApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankApp.debug.xcconfig"; path = "Target Support Files/Pods-BankApp/Pods-BankApp.debug.xcconfig"; sourceTree = "<group>"; };
 		D977040F290175D2A5745AD1 /* Pods-BankApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankApp.release.xcconfig"; path = "Target Support Files/Pods-BankApp/Pods-BankApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -156,6 +160,7 @@
 		B827AFD12260DACA003514B6 /* Extract */ = {
 			isa = PBXGroup;
 			children = (
+				B8E42A672263AFF1008B9A74 /* ViewCell */,
 				B827AFDE2260DC31003514B6 /* ExtractPresenter.swift */,
 				B827AFDF2260DC31003514B6 /* ExtractWorker.swift */,
 				B827AFE02260DC31003514B6 /* ExtractRouter.swift */,
@@ -164,6 +169,15 @@
 				B827AFE32260DC31003514B6 /* ExtractInteractor.swift */,
 			);
 			path = Extract;
+			sourceTree = "<group>";
+		};
+		B8E42A672263AFF1008B9A74 /* ViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B8E42A652263AFEA008B9A74 /* ExtractTableViewCell.swift */,
+				B8E42A682263B9B1008B9A74 /* ExtractTableViewCell.xib */,
+			);
+			path = ViewCell;
 			sourceTree = "<group>";
 		};
 		F1D7AD02C44ED314F334DBD0 /* Pods */ = {
@@ -238,6 +252,7 @@
 				B827AFC32260D89D003514B6 /* LaunchScreen.storyboard in Resources */,
 				B827AFC02260D89D003514B6 /* Assets.xcassets in Resources */,
 				B827AFBE2260D89C003514B6 /* Main.storyboard in Resources */,
+				B8E42A692263B9B1008B9A74 /* ExtractTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +313,7 @@
 				B827AFDC2260DB05003514B6 /* LoginViewController.swift in Sources */,
 				B827AFE72260DC31003514B6 /* ExtractModels.swift in Sources */,
 				B827AFD82260DB05003514B6 /* LoginPresenter.swift in Sources */,
+				B8E42A662263AFEA008B9A74 /* ExtractTableViewCell.swift in Sources */,
 				B827AFCF2260DA3D003514B6 /* String+Extensions.swift in Sources */,
 				B827AFE92260DC31003514B6 /* ExtractInteractor.swift in Sources */,
 				B827AFE82260DC31003514B6 /* ExtractViewController.swift in Sources */,

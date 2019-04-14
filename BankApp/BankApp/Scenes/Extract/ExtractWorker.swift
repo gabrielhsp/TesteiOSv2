@@ -18,7 +18,7 @@ typealias extractHandler = (_ response: ExtractResponse) -> ()
 class ExtractWorker {
     let url: String = "https://bank-app-test.herokuapp.com/api/statements/"
     
-    func getExtractList(extractId: Int, responseRequest: @escaping(extractHandler)) {
+    func getExtractList(extractId: String, responseRequest: @escaping(extractHandler)) {
         Alamofire.request("\(self.url)\(extractId)").responseJSON(completionHandler: { response in
             switch response.result {
                 case .success(_):

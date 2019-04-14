@@ -13,6 +13,7 @@
 import UIKit
 
 protocol ExtractBusinessLogic {
+    func getExtractListByUser(userId: String) -> Void
     func getUserAccountData() -> Void
 }
 
@@ -26,10 +27,18 @@ class ExtractInteractor: ExtractBusinessLogic, ExtractDataStore {
     var presenter: ExtractPresentationLogic?
     var worker: ExtractWorker?
     
-    // MARK: Do something
+    // MARK: Get the extract list by user
+    func getExtractListByUser(userId: String) {
+        worker = ExtractWorker()
+        
+        worker?.getExtractList(extractId: userId, responseRequest: { response in
+            self.presenter?.presentExtractList(extract: response.extractData)
+        })
+    }
+    
+    // MARK: Present user account information
     func getUserAccountData() {
         if let userAccount = self.userAccount {
-            print("ExtractInteractor", userAccount)
             self.presenter?.presentUserAccountData(userAccountData: userAccount)
         }
     }
