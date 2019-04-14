@@ -36,7 +36,6 @@ class ExtractViewController: UIViewController, ExtractDisplayLogic {
     }
     
     // MARK: Setup
-    
     private func setup() {
         let viewController = self
         let interactor = ExtractInteractor()
