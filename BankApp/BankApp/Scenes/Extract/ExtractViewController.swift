@@ -76,7 +76,7 @@ class ExtractViewController: UIViewController, ExtractDisplayLogic {
         }
         
         if let agency = userData.agency, let account = userData.account {
-            self.labelUserAccountAgency.text = "\(agency) / \(account.maskAgency())"
+            self.labelUserAccountAgency.text = "\(account) / \(agency.maskAgency())"
         }
         
         if let balance = userData.balance {
