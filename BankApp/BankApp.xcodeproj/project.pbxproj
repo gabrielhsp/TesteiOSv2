@@ -25,6 +25,7 @@
 		B827AFE72260DC31003514B6 /* ExtractModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B827AFE12260DC31003514B6 /* ExtractModels.swift */; };
 		B827AFE82260DC31003514B6 /* ExtractViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B827AFE22260DC31003514B6 /* ExtractViewController.swift */; };
 		B827AFE92260DC31003514B6 /* ExtractInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B827AFE32260DC31003514B6 /* ExtractInteractor.swift */; };
+		B8DEE87C2262C3A400D72EBC /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DEE87B2262C3A400D72EBC /* Double+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		B827AFE12260DC31003514B6 /* ExtractModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtractModels.swift; sourceTree = "<group>"; };
 		B827AFE22260DC31003514B6 /* ExtractViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtractViewController.swift; sourceTree = "<group>"; };
 		B827AFE32260DC31003514B6 /* ExtractInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtractInteractor.swift; sourceTree = "<group>"; };
+		B8DEE87B2262C3A400D72EBC /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
 		CA1F435A385BF25EE336BFD5 /* Pods_BankApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BankApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7423A65FCF806E614F6BC4A /* Pods-BankApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankApp.debug.xcconfig"; path = "Target Support Files/Pods-BankApp/Pods-BankApp.debug.xcconfig"; sourceTree = "<group>"; };
 		D977040F290175D2A5745AD1 /* Pods-BankApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BankApp.release.xcconfig"; path = "Target Support Files/Pods-BankApp/Pods-BankApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				B827AFCE2260DA3D003514B6 /* String+Extensions.swift */,
+				B8DEE87B2262C3A400D72EBC /* Double+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -169,7 +172,6 @@
 				D7423A65FCF806E614F6BC4A /* Pods-BankApp.debug.xcconfig */,
 				D977040F290175D2A5745AD1 /* Pods-BankApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -302,6 +304,7 @@
 				B827AFB92260D89C003514B6 /* AppDelegate.swift in Sources */,
 				B827AFDD2260DB05003514B6 /* LoginInteractor.swift in Sources */,
 				B827AFE42260DC31003514B6 /* ExtractPresenter.swift in Sources */,
+				B8DEE87C2262C3A400D72EBC /* Double+Extensions.swift in Sources */,
 				B827AFDB2260DB05003514B6 /* LoginModels.swift in Sources */,
 				B827AFE62260DC31003514B6 /* ExtractRouter.swift in Sources */,
 				B827AFE52260DC31003514B6 /* ExtractWorker.swift in Sources */,

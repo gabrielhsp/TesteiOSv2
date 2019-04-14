@@ -13,17 +13,18 @@
 import UIKit
 
 protocol ExtractDisplayLogic: class {
-    func displaySomething(viewModel: Extract.Something.ViewModel)
+    func renderUserAccountData(userData: LoginResponse.UserAccount) -> Void
 }
 
 class ExtractViewController: UIViewController, ExtractDisplayLogic {
+    @IBOutlet weak var labelUserName: UILabel!
+    @IBOutlet weak var labelUserAccountAgency: UILabel!
+    @IBOutlet weak var labelUserBalance: UILabel!
+    
     var interactor: ExtractBusinessLogic?
     var router: (NSObjectProtocol & ExtractRoutingLogic & ExtractDataPassing)?
     
-    var userAccount: LoginResponse.UserAccount?
-    
     // MARK: Object lifecycle
-    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         setup()
@@ -51,10 +52,10 @@ class ExtractViewController: UIViewController, ExtractDisplayLogic {
     }
     
     // MARK: Routing
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let scene = segue.identifier {
             let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
+            
             if let router = router, router.responds(to: selector) {
                 router.perform(selector, with: segue)
             }
@@ -62,22 +63,35 @@ class ExtractViewController: UIViewController, ExtractDisplayLogic {
     }
     
     // MARK: View lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        doSomething()
+        interactor?.getUserAccountData()
     }
     
-    // MARK: Do something
-    
-    //@IBOutlet weak var nameTextField: UITextField!
-    
-    func doSomething() {
-        let request = Extract.Something.Request()
-        interactor?.doSomething(request: request)
+    // MARK: Render user account data inside ExtractViewController
+    func renderUserAccountData(userData: LoginResponse.UserAccount) {
+        print("ExtractViewController", userData)
+        
+        if let userName = userData.name {
+            self.labelUserName.text = userName
+        }
+        
+        if let agency = userData.agency, let account = userData.account {
+            self.labelUserAccountAgency.text = "\(agency) / \(account.maskAgency())"
+        }
+        
+        if let balance = userData.balance {
+            self.labelUserBalance.text = Double(balance).transformToCurrency
+        }
     }
     
-    func displaySomething(viewModel: Extract.Something.ViewModel) {
-        //nameTextField.text = viewModel.name
+    @IBAction func actionLogoutUser(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+}
+
+extension ExtractViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 }

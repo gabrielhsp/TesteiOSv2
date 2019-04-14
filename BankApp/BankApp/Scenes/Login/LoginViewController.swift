@@ -50,7 +50,7 @@ class LoginViewController: UIViewController, LoginDisplayLogic {
         interactor.presenter = presenter
         presenter.viewController = viewController
         router.viewController = viewController
-        // router.dataStore = interactor
+        router.dataStore = interactor
     }
     
     // MARK: Routing
@@ -67,21 +67,17 @@ class LoginViewController: UIViewController, LoginDisplayLogic {
     // MARK: View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
         setupLayout()
     }
     
     @IBAction func actionLoginUser(_ sender: Any) {
-        guard let userValue = textFieldUser.text else { return }
-        guard let userPassword = textFieldPassword.text else { return }
-        
-        interactor?.validateLoginFields(user: userValue, password: userPassword)
+        if let userValue = self.textFieldUser.text, let userPassword = self.textFieldPassword.text {
+            interactor?.validateLoginFields(user: userValue, password: userPassword)
+        }
     }
     
     func success(userData: LoginResponse) {
-        // Call router
-        
-        print(userData.userAccount)
+        self.performSegue(withIdentifier: "segueExtractViewController", sender: userData)
     }
     
     func failure(alertController: UIAlertController) {

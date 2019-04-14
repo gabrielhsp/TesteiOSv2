@@ -12,30 +12,25 @@
 
 import UIKit
 
-protocol ExtractBusinessLogic
-{
-    func doSomething(request: Extract.Something.Request)
+protocol ExtractBusinessLogic {
+    func getUserAccountData() -> Void
 }
 
-protocol ExtractDataStore
-{
-    //var name: String { get set }
+protocol ExtractDataStore {
+    var userAccount: LoginResponse.UserAccount? { get set }
 }
 
-class ExtractInteractor: ExtractBusinessLogic, ExtractDataStore
-{
+class ExtractInteractor: ExtractBusinessLogic, ExtractDataStore {
+    var loginResponse: LoginResponse?
+    var userAccount: LoginResponse.UserAccount?
     var presenter: ExtractPresentationLogic?
     var worker: ExtractWorker?
-    //var name: String = ""
     
     // MARK: Do something
-    
-    func doSomething(request: Extract.Something.Request)
-    {
-        worker = ExtractWorker()
-        worker?.doSomeWork()
-        
-        let response = Extract.Something.Response()
-        presenter?.presentSomething(response: response)
+    func getUserAccountData() {
+        if let userAccount = self.userAccount {
+            print("ExtractInteractor", userAccount)
+            self.presenter?.presentUserAccountData(userAccountData: userAccount)
+        }
     }
 }

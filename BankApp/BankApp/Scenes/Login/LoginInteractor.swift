@@ -17,9 +17,14 @@ protocol LoginBusinessLogic {
     func loginUser(user: String, password: String) -> Void
 }
 
-class LoginInteractor: LoginBusinessLogic {
+protocol LoginDataStore {
+    var userAccount: LoginResponse.UserAccount? { get }
+}
+
+class LoginInteractor: LoginBusinessLogic, LoginDataStore {
     var presenter: LoginPresentationLogic?
     var worker = LoginWorker()
+    var userAccount: LoginResponse.UserAccount?
     
     // MARK: Business Rules Methods
     
@@ -75,8 +80,6 @@ class LoginInteractor: LoginBusinessLogic {
         
         worker.getUserData(parameters: parameters, responseRequest: { response in
             self.presenter?.login(loginResponse: response)
-            
-            print(response)
         })
     }
 }

@@ -12,49 +12,14 @@
 
 import UIKit
 
-@objc protocol ExtractRoutingLogic
-{
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
+@objc protocol ExtractRoutingLogic {
 }
 
-protocol ExtractDataPassing
-{
+protocol ExtractDataPassing {
     var dataStore: ExtractDataStore? { get }
 }
 
-class ExtractRouter: NSObject, ExtractRoutingLogic, ExtractDataPassing
-{
+class ExtractRouter: NSObject, ExtractRoutingLogic, ExtractDataPassing {
     weak var viewController: ExtractViewController?
     var dataStore: ExtractDataStore?
-    
-    // MARK: Routing
-    
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
-    //{
-    //  if let segue = segue {
-    //    let destinationVC = segue.destination as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //  } else {
-    //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-    //  }
-    //}
-    
-    // MARK: Navigation
-    
-    //func navigateToSomewhere(source: ExtractViewController, destination: SomewhereViewController)
-    //{
-    //  source.show(destination, sender: nil)
-    //}
-    
-    // MARK: Passing data
-    
-    //func passDataToSomewhere(source: ExtractDataStore, destination: inout SomewhereDataStore)
-    //{
-    //  destination.name = source.name
-    //}
 }

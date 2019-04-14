@@ -13,36 +13,31 @@
 import UIKit
 
 @objc protocol LoginRoutingLogic {
-//    func routToExtract(segue: UIStoryboardSegue?)
-    func segueToViewController(segue: UIStoryboardSegue?)
+    func routToViewController(segue: UIStoryboardSegue?)
 }
 
 protocol LoginDataPassing {
-    // var dataStore: LocationDataStore? { get }
+    var dataStore: LoginDataStore? { get }
 }
 
 class LoginRouter: NSObject, LoginRoutingLogic, LoginDataPassing {
     weak var viewController: LoginViewController?
+    var dataStore: LoginDataStore?
     
-    func segueToViewController(segue: UIStoryboardSegue?) {
+    func routToViewController(segue: UIStoryboardSegue?) {
         if let segue = segue {
             let destinationViewController = segue.destination as! ExtractViewController
-            let destinationDataStore = destinationViewController.router!.dataStore!
+            var destinationDataStore = destinationViewController.router!.dataStore!
+            
+            sendAccountInformation(source: dataStore!, destination: &destinationDataStore)
         }
     }
     
-//    var dataStore: LocationDataStore?
-//
-//    func routeToCurrency(segue: UIStoryboardSegue?) {
-//        if let segue = segue {
-//            let destinationVC = segue.destination as! ExtractViewController
-//            let destinationDS = destinationVC.router!.dataStore!
-//
-//            passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-//        }
-//    }
-//
-//    func passDataToSomewhere(source: LocationDataStore, destination: input CurrencyDataStore) {
-//        destination.userAccount = source.userAccount
-//    }
+    func navigateToExtractView(source: LoginViewController, destination: ExtractViewController) {
+        source.show(destination, sender: nil)
+    }
+    
+    func sendAccountInformation(source: LoginDataStore, destination: inout ExtractDataStore) {
+        destination.userAccount = source.userAccount
+    }
 }

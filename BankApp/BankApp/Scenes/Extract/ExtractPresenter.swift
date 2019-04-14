@@ -12,20 +12,17 @@
 
 import UIKit
 
-protocol ExtractPresentationLogic
-{
-    func presentSomething(response: Extract.Something.Response)
+protocol ExtractPresentationLogic {
+    func presentUserAccountData(userAccountData: LoginResponse.UserAccount) -> Void
 }
 
-class ExtractPresenter: ExtractPresentationLogic
-{
+class ExtractPresenter: ExtractPresentationLogic {
     weak var viewController: ExtractDisplayLogic?
     
-    // MARK: Do something
-    
-    func presentSomething(response: Extract.Something.Response)
-    {
-        let viewModel = Extract.Something.ViewModel()
-        viewController?.displaySomething(viewModel: viewModel)
+    // MARK: Present user account data inside viewController
+    func presentUserAccountData(userAccountData: LoginResponse.UserAccount) {
+        print("ExtractPresenter", userAccountData)
+        
+        self.viewController?.renderUserAccountData(userData: userAccountData)
     }
 }
