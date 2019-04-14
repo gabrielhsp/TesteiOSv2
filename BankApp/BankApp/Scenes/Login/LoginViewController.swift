@@ -70,6 +70,10 @@ class LoginViewController: UIViewController, LoginDisplayLogic {
         setupLayout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        clearTextFields()
+    }
+    
     @IBAction func actionLoginUser(_ sender: Any) {
         if let userValue = self.textFieldUser.text, let userPassword = self.textFieldPassword.text {
             interactor?.validateLoginFields(user: userValue, password: userPassword)
@@ -82,6 +86,11 @@ class LoginViewController: UIViewController, LoginDisplayLogic {
     
     func failure(alertController: UIAlertController) {
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func clearTextFields() {
+        self.textFieldUser.text?.removeAll()
+        self.textFieldPassword.text?.removeAll()
     }
     
     // MARK: Setup Layout
