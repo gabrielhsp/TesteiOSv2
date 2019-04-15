@@ -20,8 +20,6 @@ class ExtractWorker {
     
     func getExtractList(extractId: String, responseRequest: @escaping(extractHandler)) {
         Alamofire.request("\(self.url)\(extractId)").responseJSON(completionHandler: { response in
-            print("Extract response", response)
-            
             switch response.result {
                 case .success(_):
                     do {

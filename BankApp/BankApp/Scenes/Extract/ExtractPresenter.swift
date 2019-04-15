@@ -22,8 +22,6 @@ class ExtractPresenter: ExtractPresentationLogic {
     
     func presentExtractList(extract: [ExtractResponse.ExtractData]?) {
         if let extract = extract {
-            print("Extract Presenter", extract)
-            
             self.viewController?.success(extract: extract)
         }
     }
