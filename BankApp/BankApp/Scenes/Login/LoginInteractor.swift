@@ -33,7 +33,7 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore {
     func validateLoginFields(user: String, password: String) -> Bool {
         if valuesAreEmpty(user: user, password: password) && userLoginIsValid(user: user) && passwordIsValid(password: password) {
             self.loginUser(user: user, password: password)
-            
+        
             return true
         }
         

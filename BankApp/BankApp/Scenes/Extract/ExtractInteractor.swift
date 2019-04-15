@@ -13,8 +13,10 @@
 import UIKit
 
 protocol ExtractBusinessLogic {
+    func checkExistentUser() -> Bool
     func getExtractListByUser(userId: String) -> Void
     func getUserAccountData() -> Void
+    func clearUserDefaults() -> Void
 }
 
 protocol ExtractDataStore {
@@ -37,9 +39,20 @@ class ExtractInteractor: ExtractBusinessLogic, ExtractDataStore {
     }
     
     // MARK: Present user account information
+    func checkExistentUser() -> Bool {
+        return UserDefaults.standard.bool(forKey: "user")
+    }
+    
     func getUserAccountData() {
         if let userAccount = self.userAccount {
             self.presenter?.presentUserAccountData(userAccountData: userAccount)
         }
+    }
+    
+    // MARK: Clear user inside UserDefaults
+    func clearUserDefaults() {
+        let userDefaults = UserDefaults.standard
+            userDefaults.removeObject(forKey: "user")
+            userDefaults.synchronize()
     }
 }

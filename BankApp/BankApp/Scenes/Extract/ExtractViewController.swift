@@ -68,9 +68,7 @@ class ExtractViewController: UIViewController, ExtractDisplayLogic {
     // MARK: View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         interactor?.getUserAccountData()
-        
         registerTableViewCell()
         setupTableViewCell()
         renderExtractItemsList()
@@ -78,6 +76,8 @@ class ExtractViewController: UIViewController, ExtractDisplayLogic {
     
     // MARK: Render user account data inside ExtractViewController
     func renderUserAccountData(userData: LoginResponse.UserAccount) {
+        print(userData)
+        
         self.userId = String(userData.id)
         
         if let userName = userData.name {
@@ -94,6 +94,7 @@ class ExtractViewController: UIViewController, ExtractDisplayLogic {
     }
     
     @IBAction func actionLogoutUser(_ sender: Any) {
+        interactor?.clearUserDefaults()
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -107,7 +108,9 @@ class ExtractViewController: UIViewController, ExtractDisplayLogic {
     }
     
     func renderExtractItemsList() {
-        interactor?.getExtractListByUser(userId: self.userId!)
+        guard let userId = self.userId else { return }
+        
+        interactor?.getExtractListByUser(userId: userId)
     }
 }
 
