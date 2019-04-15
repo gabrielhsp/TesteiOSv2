@@ -25,6 +25,8 @@ class ExtractTableViewCell: UITableViewCell {
     }
     
     private func setupLayout() {
+        self.viewExtract.layer.borderWidth = 1
+        self.viewExtract.layer.borderColor = #colorLiteral(red: 0.8588235294, green: 0.8745098039, blue: 0.8901960784, alpha: 0.3)
         self.viewExtract.layer.shadowColor = #colorLiteral(red: 0.8509803922, green: 0.8862745098, blue: 0.9137254902, alpha: 1)
         self.viewExtract.layer.shadowOpacity = 1
         self.viewExtract.layer.cornerRadius = 6

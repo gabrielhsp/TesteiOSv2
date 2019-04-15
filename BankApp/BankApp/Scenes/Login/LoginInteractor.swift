@@ -80,7 +80,12 @@ class LoginInteractor: LoginBusinessLogic, LoginDataStore {
         
         worker.getUserData(parameters: parameters, responseRequest: { response in
             self.userAccount = response.userAccount
+            self.saveUserOnUSerDefaults(user: user)
             self.presenter?.login(loginResponse: response)
         })
+    }
+    
+    func saveUserOnUSerDefaults(user: String) {
+        UserDefaults.standard.set(user, forKey: "user")
     }
 }
