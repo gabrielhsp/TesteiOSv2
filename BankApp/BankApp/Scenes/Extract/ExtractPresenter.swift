@@ -14,22 +14,22 @@ import UIKit
 
 protocol ExtractPresentationLogic {
     func presentUserAccountData(userAccountData: LoginResponse.UserAccount) -> Void
-    func presentExtractList(extract: ExtractResponse.ExtractData?) -> Void
+    func presentExtractList(extract: [ExtractResponse.ExtractData]?) -> Void
 }
 
 class ExtractPresenter: ExtractPresentationLogic {
     weak var viewController: ExtractDisplayLogic?
     
-    func presentExtractList(extract: ExtractResponse.ExtractData?) {
+    func presentExtractList(extract: [ExtractResponse.ExtractData]?) {
         if let extract = extract {
+            print("Extract Presenter", extract)
+            
             self.viewController?.success(extract: extract)
         }
     }
     
     // MARK: Present user account data inside viewController
     func presentUserAccountData(userAccountData: LoginResponse.UserAccount) {
-        print("ExtractPresenter", userAccountData)
-        
         self.viewController?.renderUserAccountData(userData: userAccountData)
     }
 }

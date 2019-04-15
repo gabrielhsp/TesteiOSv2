@@ -13,8 +13,12 @@
 import UIKit
 
 struct ExtractResponse: Codable {
-    var extractData: ExtractData?
+    var extractData: [ExtractData]
     var error: Error?
+    
+    private enum CodingKeys: String, CodingKey {
+        case extractData = "statementList"
+    }
     
     struct ExtractData: Codable {
         var title: String?

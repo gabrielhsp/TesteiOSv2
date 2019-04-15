@@ -13,7 +13,7 @@
 import UIKit
 
 protocol ExtractDisplayLogic: class {
-    func success(extract: ExtractResponse.ExtractData) -> Void
+    func success(extract: [ExtractResponse.ExtractData]) -> Void
     func renderUserAccountData(userData: LoginResponse.UserAccount) -> Void
 }
 
@@ -97,12 +97,12 @@ class ExtractViewController: UIViewController, ExtractDisplayLogic {
         self.navigationController?.popViewController(animated: true)
     }
     
-    func success(extract: ExtractResponse.ExtractData) {
+    func success(extract: [ExtractResponse.ExtractData]) {
         showExtractList(extract: extract)
     }
     
-    func showExtractList(extract: ExtractResponse.ExtractData) {
-        self.extractItems = [extract]
+    func showExtractList(extract: [ExtractResponse.ExtractData]) {
+        self.extractItems = extract
         self.tableViewExtract.reloadData()
     }
     
