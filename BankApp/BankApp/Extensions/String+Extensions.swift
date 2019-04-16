@@ -71,14 +71,14 @@ extension String {
         }
     }
     
-    func convertStringToDateFormat() -> String {
+    func convertStringToDateFormat(date: String) -> String {
         let dateFormatterGet = DateFormatter()
-            dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            dateFormatterGet.dateFormat = "yyyy-MM-dd"
         
         let dateFormatterPrint = DateFormatter()
             dateFormatterPrint.dateFormat = "dd/MM/yyyy"
         
-        if let date = dateFormatterGet.date(from: "2016-02-29 12:24:26") {
+        if let date = dateFormatterGet.date(from: date) {
             return dateFormatterPrint.string(from: date)
         } else {
             return "There was an error decoding the string"

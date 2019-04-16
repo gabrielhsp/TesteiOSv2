@@ -45,11 +45,13 @@ class ExtractTableViewCell: UITableViewCell {
     }
     
     func renderExtractData(extract: ExtractResponse.ExtractData) {
+        guard let extractDate = extract.date else { return }
+        
         valuesArePositive(value: extract.value)
         
         self.labelExtractTitle.text = extract.title
         self.labelExtractDescription.text = extract.description
-        self.labelExtractDate.text = extract.date?.convertStringToDateFormat()
+        self.labelExtractDate.text = extractDate.convertStringToDateFormat(date: extractDate)
         self.labelExtractValue.text = extract.value?.transformToCurrency
     }
 }
