@@ -11,15 +11,14 @@
 //
 
 @testable import BankApp
+
 import XCTest
 
 class LoginPresenterTests: XCTestCase {
     // MARK: Subject under test
-    
     var sut: LoginPresenter!
     
     // MARK: Test lifecycle
-    
     override func setUp() {
         super.setUp()
         setupLoginPresenter()
@@ -30,7 +29,6 @@ class LoginPresenterTests: XCTestCase {
     }
     
     // MARK: Test setup
-    
     func setupLoginPresenter() {
         sut = LoginPresenter()
     }

@@ -11,44 +11,25 @@
 //
 
 @testable import BankApp
+
 import XCTest
 
-class LoginWorkerTests: XCTestCase
-{
-  // MARK: Subject under test
-  
-  var sut: LoginWorker!
-  
-  // MARK: Test lifecycle
-  
-  override func setUp()
-  {
-    super.setUp()
-    setupLoginWorker()
-  }
-  
-  override func tearDown()
-  {
-    super.tearDown()
-  }
-  
-  // MARK: Test setup
-  
-  func setupLoginWorker()
-  {
-    sut = LoginWorker()
-  }
-  
-  // MARK: Test doubles
-  
-  // MARK: Tests
-  
-  func testSomething()
-  {
-    // Given
+class LoginWorkerTests: XCTestCase {
+    // MARK: Subject under test
+    var sut: LoginWorker!
     
-    // When
+    // MARK: Test lifecycle
+    override func setUp() {
+        super.setUp()
+        setupLoginWorker()
+    }
     
-    // Then
-  }
+    override func tearDown() {
+        super.tearDown()
+    }
+    
+    // MARK: Test setup
+    func setupLoginWorker() {
+        sut = LoginWorker()
+    }
 }
